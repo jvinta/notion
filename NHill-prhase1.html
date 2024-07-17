@@ -15,14 +15,17 @@
     font-family: serif;
   }
 
+  .notion-widget {
+    text-align: center; /* Centrar contenido */
+  }
+
   #quote {
     color: #E1D2BA; /* Color de texto hueso */
     font-size: 28px; /* Tamaño de la fuente de la frase aumentado */
     line-height: 1.6; /* Espaciado entre líneas */
-    text-align: center; /* Centrar el texto */
     overflow: hidden; /* Para ocultar texto que se desborda */
     white-space: nowrap; /* Para que no se divida el texto */
-    animation: typeIn 4s steps(40) forwards, fadeOut 2s 5s forwards;
+    animation: typeIn 4s steps(40) forwards, fadeOut 2s 6s forwards, fadeIn 0s 8s forwards;
   }
 
   @keyframes typeIn {
@@ -43,11 +46,20 @@
     }
   }
 
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
   #author {
     color: #E1D2BA; /* Color de texto hueso */
     font-size: 20px; /* Tamaño de la fuente del autor aumentado */
-    text-align: right; /* Alinear autor a la derecha */
     margin-top: 10px; /* Espacio encima del autor */
+    animation: fadeOut 2s 6s forwards, fadeIn 0s 8s forwards;
   }
 </style>
 </head>
