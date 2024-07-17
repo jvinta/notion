@@ -21,6 +21,13 @@
     font-size: 48px; /* Cambiado a tamaño "Huge" */
     white-space: nowrap;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .shining-star {
+    animation: shining 1.5s infinite;
+    margin: 0 10px; /* Espacio alrededor de las estrellas */
   }
 
   .typing-animation {
@@ -36,10 +43,19 @@
     0% { opacity: 1; transform: scale(1); }
     100% { opacity: 0; transform: scale(0.5); } /* Efecto de desintegración ajustado */
   }
+
+  @keyframes shining {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+  }
 </style>
 </head>
 <body>
-  <div class="typing-text typing-animation">The Place Where Dreams are Real</div>
+  <div class="typing-text typing-animation">
+    <span class="shining-star">✦</span>
+    The Place Where Dreams are Real
+    <span class="shining-star">✦</span>
+  </div>
 
   <script>
     // JavaScript para reiniciar la animación cada 7 segundos
@@ -49,7 +65,6 @@
       void textElement.offsetWidth; // trigger reflow
       textElement.classList.add('typing-animation'); // vuelve a agregar la clase para iniciar la animación
     }, 7000); // 7 segundos
-
   </script>
 </body>
 </html>
