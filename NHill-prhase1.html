@@ -6,24 +6,30 @@
 <title>Napoleon Hill Quote Widget</title>
 <style>
   .notion-widget {
-    width: 350px; /* Tamaño del widget aumentado */
+    width: 400px; /* Tamaño del widget aumentado */
     height: auto;
-    padding: 20px;
+    padding: 30px;
     border: 2px solid #000; /* Borde negro */
-    border-radius: 8px; /* Bordes más redondeados */
+    border-radius: 10px; /* Bordes más redondeados */
     text-align: center; /* Centrar el texto */
     background-color: #fff; /* Fondo blanco */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
     color: #000; /* Color de texto negro */
     font-family: Arial, sans-serif; /* Familia de fuente */
-    animation: fadeInOut 5s ease-in-out infinite alternate;
+    overflow: hidden; /* Para ocultar texto que se desborda */
   }
 
-  @keyframes fadeInOut {
-    0% {
-      opacity: 0;
+  @keyframes typeIn {
+    from {
+      width: 0;
     }
-    50% {
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes fadeOut {
+    0% {
       opacity: 1;
     }
     100% {
@@ -32,13 +38,16 @@
   }
 
   #quote {
-    font-size: 18px; /* Tamaño de la fuente de la frase */
+    font-size: 20px; /* Tamaño de la fuente de la frase */
     line-height: 1.6; /* Espaciado entre líneas */
-    margin-bottom: 10px; /* Espacio debajo de la frase */
+    margin-bottom: 20px; /* Espacio debajo de la frase */
+    white-space: nowrap; /* Para que no se divida el texto */
+    overflow: hidden; /* Para ocultar texto que se desborda */
+    animation: typeIn 5s steps(40) forwards, fadeOut 5s 7s forwards;
   }
 
   #author {
-    font-size: 14px; /* Tamaño de la fuente del autor */
+    font-size: 16px; /* Tamaño de la fuente del autor */
   }
 </style>
 </head>
