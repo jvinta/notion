@@ -35,7 +35,7 @@
   }
 
   .typing-animation {
-    animation: typing-in-1 6s steps(50, end), typing-in-2 8s steps(70, end) 6s forwards, typing-out 4s 14s forwards;
+    animation: typing-in-1 6s steps(50, end), typing-in-2 8s steps(70, end) 6s forwards, typing-in-3 5s steps(30, end) 14s forwards, typing-out 4s 19s forwards;
   }
 
   @keyframes typing-in-1 {
@@ -44,6 +44,11 @@
   }
 
   @keyframes typing-in-2 {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes typing-in-3 {
     from { width: 0 }
     to { width: 100% }
   }
@@ -59,7 +64,18 @@
     <span class="circle"></span>
     Remember, your only real limitation is<br>
     <span style="margin-left: 175px;">the one that you set up in your</span><br>
-    <span style="margin-left: 250px;">own mind - Napoleon Hill</span><span class="circle"></span>
+    <span style="margin-left: 250px;">own mind</span><br>
+    <span style="margin-left: 300px;">- Napoleon Hill</span><span class="circle"></span>
   </div>
 
-  < , into
+  <script>
+    // JavaScript para reiniciar la animación cada 23 segundos
+    setInterval(function() {
+      var textElement = document.querySelector('.typing-text');
+      textElement.classList.remove('typing-animation'); // remover clase para reiniciar animación
+      void textElement.offsetWidth; // trigger reflow
+      textElement.classList.add('typing-animation'); // reanudar animación de aparición y desaparición
+    }, 23000); // reiniciar animación cada 23 segundos
+  </script>
+</body>
+</html>
