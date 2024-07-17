@@ -3,79 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Napoleon Hill Quote Widget</title>
+<title>Napoleon Hill Inspiration</title>
 <style>
-  body {
-    background-color: #000; /* Fondo negro para todo el body */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    font-family: serif;
-  }
-
-  .notion-widget {
-    text-align: center; /* Centrar contenido */
-  }
-
-  #quote {
-    color: #E1D2BA; /* Color de texto hueso */
-    font-size: 28px; /* Tamaño de la fuente de la frase aumentado */
-    line-height: 1.6; /* Espaciado entre líneas */
-    overflow: hidden; /* Para ocultar texto que se desborda */
-    white-space: nowrap; /* Para que no se divida el texto */
-    animation: typeIn 4s steps(40) forwards, fadeOut 2s 6s forwards, fadeIn 0s 8s forwards, resetAnimation 8s forwards;
-  }
-
-  @keyframes typeIn {
-    from {
-      width: 0;
+    body {
+        background-color: #000;
+        font-family: serif;
+        color: #fff;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
     }
-    to {
-      width: 100%;
+    .text {
+        font-size: 24px;
+        opacity: 0;
+        animation: fadeInOut 8s infinite; /* Ajusta la duración del loop según necesites */
     }
-  }
-
-  @keyframes fadeOut {
-    0% {
-      opacity: 1;
+    @keyframes fadeInOut {
+        0%, 100% {
+            opacity: 0;
+        }
+        10%, 90% {
+            opacity: 1;
+        }
     }
-    100% {
-      opacity: 0;
-    }
-  }
-
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @keyframes resetAnimation {
-    0%, 100% {
-      width: 0;
-    }
-    50% {
-      width: 100%;
-    }
-  }
-
-  #author {
-    color: #E1D2BA; /* Color de texto hueso */
-    font-size: 20px; /* Tamaño de la fuente del autor aumentado */
-    margin-top: 10px; /* Espacio encima del autor */
-    animation: fadeOut 2s 6s forwards, fadeIn 0s 8s forwards;
-  }
 </style>
 </head>
 <body>
-  <div class="notion-widget">
-    <p id="quote">"Remember, your only real limitation is the one that you set up in your own mind."</p>
-    <p id="author">- Napoleon Hill</p>
-  </div>
+<div class="text">
+    <p>Remember, your only real limitation is the one that you set up in your own mind</p>
+    <p>Napoleon Hill</p>
+</div>
+
+<script>
+    function fadeOutText() {
+        setTimeout(function() {
+            document.querySelector('.text').style.opacity = '0';
+        }, 5000); // 5 segundos para desvanecer
+    }
+    setInterval(fadeOutText, 8000); // 8 segundos para repetir
+</script>
+
 </body>
 </html>
