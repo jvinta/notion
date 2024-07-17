@@ -6,13 +6,14 @@
 <title>Napoleon Hill Quote Widget</title>
 <style>
   .notion-widget {
-    width: 300px; /* Tamaño del widget */
+    width: 350px; /* Tamaño del widget aumentado */
     height: auto;
-    padding: 10px;
-    border: 2px solid #ccc; /* Borde alrededor del widget */
-    border-radius: 5px; /* Bordes redondeados */
+    padding: 20px;
+    border: 2px solid #000; /* Borde negro */
+    border-radius: 8px; /* Bordes más redondeados */
     text-align: center; /* Centrar el texto */
-    animation: fade 6s infinite; /* Animación de fade */
+    background-color: #fff; /* Fondo blanco */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
   }
 
   @keyframes fade {
@@ -25,14 +26,22 @@
   }
 
   #quote {
-    font-size: 16px; /* Tamaño de la fuente */
-    line-height: 1.5; /* Espaciado entre líneas */
+    font-size: 18px; /* Tamaño de la fuente de la frase */
+    line-height: 1.6; /* Espaciado entre líneas */
+    margin-bottom: 10px; /* Espacio debajo de la frase */
+    color: #fff; /* Color de texto blanco */
+  }
+
+  #author {
+    font-size: 14px; /* Tamaño de la fuente del autor */
+    color: #fff; /* Color de texto blanco */
   }
 </style>
 </head>
 <body>
   <div class="notion-widget">
-    <p id="quote">Remember, your only real limitation is the one that you set up in your own mind - Napoleon Hill</p>
+    <p id="quote">"Remember, your only real limitation is the one that you set up in your own mind."</p>
+    <p id="author">- Napoleon Hill</p>
   </div>
 </body>
 </html>
