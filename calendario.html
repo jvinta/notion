@@ -1,141 +1,107 @@
 <!DOCTYPE html>
-<!-- original:https://codepen.io/boudra/pen/raErwP -->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendario</title>
+    <title>Calendario Boho</title>
 
     <style>
         body {
-            font-family: monospace;
-        }
-
-        .wrapper {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #E1D2BA; /* Fondo principal */
+            margin: 0;
+            padding: 0;
             display: flex;
-            align-items: center;
             justify-content: center;
-            flex-direction: column;
-            min-height: 100%;
+            align-items: center;
+            height: 100vh;
         }
 
-        #calendar {
-            margin: 0 auto;
-            font-size: 14px;
-        }
-
-        table {
-            border-collapse: collapse;
-            table-layout: fixed;
-            position: absolute;
-            background-color: #fff;
-            border: 2px solid #efb064; /* Tono tierra suave */
-            box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.3);
-            border-radius: 5px;
+        .calendar-container {
+            background-color: #989376; /* Fondo del calendario */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 300px;
         }
 
         .month {
-            background-color: #efb064; /* Tono tierra suave */
-            color: #fff;
+            background-color: #3D5B3B; /* Encabezado del mes */
+            color: #E1D2BA; /* Texto del encabezado */
             font-size: 1.5em;
-            padding: 5px; /* Añadido para separación */
+            padding: 10px;
+            text-align: center;
         }
 
         .month .year {
-            font-size: 12px;
-            font-weight: normal;
             display: block;
-            text-shadow: none;
-            color: #fff;
-            margin-top: 5px; /* Espacio entre mes y año */
-        }
-
-        .month span {
-            display: inline-block;
-            animation: highlight 3s infinite;
-        }
-
-        .year {
-            font-size: 12px;
+            font-size: 0.7em;
             font-weight: normal;
-            display: block;
-            text-shadow: none;
-            color: #fff;
+            color: #E1D2BA; /* Color del año */
+            margin-top: 5px;
         }
 
-        .day-header {
-            background-color: #f3fff3;
-            color: #000; /* Color de texto para los encabezados */
-            font-weight: bold;
-            padding: 5px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
-        td, th {
+        th, td {
             text-align: center;
-            background-color: #fff;
+            padding: 8px;
+            font-size: 0.9em;
         }
 
         th {
-            padding: 10px;
+            background-color: #CA8F6D; /* Encabezado de día */
+            color: #E1D2BA; /* Texto del encabezado de día */
+            font-weight: normal;
         }
 
         td {
-            padding: 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            background-color: #E1D2BA; /* Fondo de día */
+            color: #3D5B3B; /* Texto de día */
+            cursor: pointer;
         }
 
-        td>span {
-            color: #333; /* Color de texto principal */
-            padding: 10px;
-            display: block;
-            border: 2px solid transparent;
-            transition: border 0.3s ease;
-        }
-
-        td.avui>span {
+        td.avui {
+            background-color: #3D5B3B; /* Día actual */
+            color: #E1D2BA; /* Texto del día actual */
             font-weight: bold;
-            background-color: #efb064; /* Tono tierra suave */
-            color: #fff;
-        }
-
-        td.fora > span {
-            opacity: 0.2;
         }
 
         .boto-next, .boto-prev {
-            background: #efb064; /* Tono tierra suave */
-            color: #fff;
+            background: #CA8F6D; /* Botones de navegación */
+            color: #E1D2BA; /* Texto de botones de navegación */
             font-family: inherit;
             border: none;
-            font-size: 25px;
-            font-weight: bold;
-            text-shadow: inherit;
-            padding: 2px 10px 5px 10px;
-            line-height: 1px;
-            height: 30px;
-            width: 30px;
-            vertical-align: middle;
-            position: absolute;
-            top: 15px;
+            font-size: 18px;
+            padding: 5px 10px;
+            cursor: pointer;
         }
 
-        .boto-next { right: 10px; padding-left: 13px; }
-        .boto-prev { left: 10px; padding-right: 13px; }
+        .boto-next {
+            float: right;
+        }
+
+        .boto-prev {
+            float: left;
+        }
 
         @keyframes highlight {
             0%, 100% {
-                color: #fff;
+                color: #E1D2BA;
                 font-size: 1.2em;
             }
             50% {
-                color: #d08c3a; /* Color de texto más claro */
+                color: #CA8F6D;
                 font-size: 1.3em;
             }
         }
     </style>
 </head>
 <body>
-    <div class="">
+    <div class="calendar-container">
         <div id="calendar"></div>
     </div>
     <script>
@@ -227,17 +193,15 @@
             fila.innerHTML += '<th class="day-header">' + days_abr[0] + '</th>';
             e.appendChild(fila);
 
-            /* Obtinc el dia que va acabar el mes anterior */
-            var inici_mes =
+            /* Obtener el día que va a empezar el mes */
+            var inicio_mes =
                 new Date(data.getFullYear(), data.getMonth(), -1).getDay();
 
             var actual = new Date(data.getFullYear(),
                 data.getMonth(),
-                -inici_mes);
+                -inicio_mes);
 
-            /* 6 setmanes per cobrir totes les posiblitats
-             *  Quedaria mes consistent alhora de mostrar molts mesos 
-             *  en una quadricula */
+            /* 6 semanas para cubrir todas las posibilidades */
             for (var s = 0; s < 6; s++) {
                 var fila = document.createElement('tr');
 
@@ -252,7 +216,7 @@
                     if (actual.getMonth() !== data.getMonth())
                         cela.className = 'fora';
 
-                    /* Si es avui el decorem */
+                    /* Si es hoy, resaltar */
                     if (data.getDate() == actual.getDate() &&
                         data.getMonth() == actual.getMonth())
                         cela.className = 'avui';
