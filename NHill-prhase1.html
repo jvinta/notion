@@ -17,6 +17,13 @@
     color: #000; /* Color de texto negro */
     font-family: Arial, sans-serif; /* Familia de fuente */
     overflow: hidden; /* Para ocultar texto que se desborda */
+    position: relative; /* Para ajustar el texto */
+  }
+
+  .text-container {
+    position: relative;
+    overflow: hidden;
+    height: 80px; /* Altura ajustable para mostrar la frase completa */
   }
 
   @keyframes typeIn {
@@ -53,7 +60,9 @@
 </head>
 <body>
   <div class="notion-widget">
-    <p id="quote">"Remember, your only real limitation is the one that you set up in your own mind."</p>
+    <div class="text-container">
+      <p id="quote">"Remember, your only real limitation is the one that you set up in your own mind."</p>
+    </div>
     <p id="author">- Napoleon Hill</p>
   </div>
 </body>
