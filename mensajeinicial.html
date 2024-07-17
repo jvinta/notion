@@ -19,9 +19,12 @@
   .typing-text {
     color: #fff;
     font-size: 48px; /* Cambiado a tamaño "Huge" */
-    overflow: hidden;
     white-space: nowrap;
-    border-right: .15em solid #fff; /* cursor blinking effect */
+    overflow: hidden;
+  }
+
+  .typing-animation {
+    animation: typing 6s steps(30, end) forwards, disintegration 1s 6s forwards;
   }
 
   @keyframes typing {
@@ -36,24 +39,17 @@
 </style>
 </head>
 <body>
-  <div class="typing-text">The Place Where Dreams are Real</div>
+  <div class="typing-text typing-animation">The Place Where Dreams are Real</div>
 
   <script>
-    // Obtener el elemento de texto
-    var textElement = document.querySelector('.typing-text');
-    
-    // Función para manejar la animación de escritura y desintegración
-    function playAnimation() {
-      textElement.style.animation = 'typing 6s steps(30, end), disintegration 1s forwards';
-      setTimeout(function() {
-        textElement.style.animation = 'none'; // reset animation
-        void textElement.offsetWidth; // trigger reflow
-        textElement.style.animation = 'typing 6s steps(30, end), disintegration 1s forwards';
-      }, 7000); // 7 segundos: 6s (typing) + 1s (delay)
-    }
-    
-    // Llamar a la función para iniciar la animación
-    playAnimation();
+    // JavaScript para reiniciar la animación cada 7 segundos
+    setInterval(function() {
+      var textElement = document.querySelector('.typing-text');
+      textElement.classList.remove('typing-animation'); // remueve la clase para reiniciar la animación
+      void textElement.offsetWidth; // trigger reflow
+      textElement.classList.add('typing-animation'); // vuelve a agregar la clase para iniciar la animación
+    }, 7000); // 7 segundos
+
   </script>
 </body>
 </html>
