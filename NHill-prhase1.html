@@ -37,23 +37,19 @@
         if (index < quote.length) {
             quoteElement.innerHTML += quote.charAt(index);
             index++;
-            setTimeout(typeWriter, 100); // Velocidad de tipeo (ajustable)
+            setTimeout(typeWriter, 60); // Velocidad de tipeo ajustada a 60ms
         } else {
-            fadeOutAuthor();
+            setTimeout(function() {
+                document.getElementById('author').style.opacity = '1';
+            }, 500); // Tiempo de espera antes de mostrar el autor (ajustable)
         }
-    }
-
-    function fadeOutAuthor() {
-        setTimeout(function() {
-            document.getElementById('author').style.opacity = '0';
-        }, 2000); // Tiempo antes de desvanecer el autor (ajustable)
     }
 
     document.addEventListener('DOMContentLoaded', function() {
         setTimeout(function() {
             document.querySelector('.text').style.opacity = '1';
             typeWriter();
-        }, 1000); // Tiempo antes de iniciar el tipeo (ajustable)
+        }, 1000); // Tiempo de espera antes de iniciar el tipeo (ajustable)
     });
 </script>
 
