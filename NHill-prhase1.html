@@ -57,14 +57,16 @@
         setTimeout(function() {
             authorElement.style.opacity = '1';
             fadeOutText();
-        }, 500); // Tiempo de espera antes de mostrar el autor (ajustable)
+        }, 1000); // Tiempo de espera antes de mostrar el autor (ajustable)
     }
 
     function fadeOutText() {
         setTimeout(function() {
             quoteElement.style.opacity = '0';
             authorElement.style.opacity = '0';
-            setTimeout(typeWriter, 1000); // Reiniciar la animación después de desvanecer
+            setTimeout(function() {
+                typeWriter(); // Reiniciar la animación después de desvanecer
+            }, 2000); // Tiempo antes de reiniciar la animación (ajustable)
         }, 3000); // Tiempo antes de desvanecer la frase y el autor (ajustable)
     }
 
