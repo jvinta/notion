@@ -49,25 +49,25 @@
             index++;
             setTimeout(typeWriterLoop, 60); // Velocidad de tipeo ajustada a 60ms
         } else {
-            setTimeout(function() {
-                fadeOutText();
-            }, 2000); // Tiempo de espera antes de desvanecer la frase (ajustable)
+            fadeInAuthor();
         }
     }
 
     function fadeInAuthor() {
         setTimeout(function() {
             authorElement.style.opacity = '1';
-        }, 500); // Tiempo de espera antes de mostrar el autor (ajustable)
+            fadeOutText();
+        }, 1000); // Tiempo de espera antes de mostrar el autor (ajustable)
     }
 
     function fadeOutText() {
-        quoteElement.style.opacity = '0';
-        authorElement.style.opacity = '0';
         setTimeout(function() {
-            quoteElement.innerHTML = ''; // Reiniciar el contenido de la frase
-            fadeInAuthor(); // Volver a mostrar la frase y el nombre
-            setTimeout(typeWriterLoop, 1000); // Tiempo antes de iniciar el tipeo nuevamente (ajustable)
+            quoteElement.style.opacity = '0';
+            authorElement.style.opacity = '0';
+            setTimeout(function() {
+                fadeInAuthor(); // Volver a mostrar la frase y el nombre
+                setTimeout(typeWriter, 1000); // Reiniciar la animación después de desvanecer
+            }, 1000); // Tiempo antes de reiniciar la animación (ajustable)
         }, 1000); // Tiempo antes de desvanecer la frase y el autor (ajustable)
     }
 
