@@ -31,17 +31,21 @@
   }
 
   .typing-animation {
-    animation: typing 6s steps(30, end) forwards, disintegration 1s 6s forwards;
+    animation: typing-in 6s steps(30, end) forwards;
   }
 
-  @keyframes typing {
+  .disintegration-animation {
+    animation: disintegration 3s 6s forwards;
+  }
+
+  @keyframes typing-in {
     from { width: 0 }
     to { width: 100% }
   }
 
   @keyframes disintegration {
-    0% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(0.5); } /* Efecto de desintegración ajustado */
+    from { width: 100% }
+    to { width: 0 }
   }
 
   @keyframes shining {
@@ -58,13 +62,16 @@
   </div>
 
   <script>
-    // JavaScript para reiniciar la animación cada 7 segundos
+    // JavaScript para reiniciar la animación cada 9 segundos
     setInterval(function() {
       var textElement = document.querySelector('.typing-text');
-      textElement.classList.remove('typing-animation'); // remueve la clase para reiniciar la animación
+      textElement.classList.remove('typing-animation', 'disintegration-animation'); // remover clases para reiniciar animaciones
       void textElement.offsetWidth; // trigger reflow
-      textElement.classList.add('typing-animation'); // vuelve a agregar la clase para iniciar la animación
-    }, 7000); // 7 segundos
+      textElement.classList.add('typing-animation'); // reanudar animación de aparición
+      setTimeout(function() {
+        textElement.classList.add('disintegration-animation'); // iniciar animación de desaparición
+      }, 6000); // iniciar desaparición después de 6 segundos
+    }, 9000); // reiniciar animación cada 9 segundos
   </script>
 </body>
 </html>
