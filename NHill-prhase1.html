@@ -16,14 +16,18 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
     color: #000; /* Color de texto negro */
     font-family: Arial, sans-serif; /* Familia de fuente */
+    animation: fadeInOut 5s ease-in-out infinite alternate;
   }
 
-  @keyframes fade {
-    0%, 100% {
+  @keyframes fadeInOut {
+    0% {
       opacity: 0;
     }
     50% {
       opacity: 1;
+    }
+    100% {
+      opacity: 0;
     }
   }
 
