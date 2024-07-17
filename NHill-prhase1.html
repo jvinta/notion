@@ -56,25 +56,23 @@
     function fadeInAuthor() {
         setTimeout(function() {
             authorElement.style.opacity = '1';
-            fadeOutText();
-        }, 1000); // Tiempo de espera antes de mostrar el autor (ajustable)
+            setTimeout(fadeOutText, 1000); // Desvanecer después de 1 segundo
+        }, 1000); // Mostrar autor después de 1 segundo
     }
 
     function fadeOutText() {
         setTimeout(function() {
             quoteElement.style.opacity = '0';
             authorElement.style.opacity = '0';
-            setTimeout(function() {
-                typeWriter(); // Reiniciar la animación después de desvanecer
-            }, 1000); // Tiempo antes de reiniciar la animación (ajustable)
-        }, 1000); // Tiempo antes de desvanecer la frase y el autor (ajustable)
+            setTimeout(typeWriter, 1000); // Reiniciar la animación después de 1 segundo
+        }, 1000); // Desvanecer después de 1 segundo
     }
 
     document.addEventListener('DOMContentLoaded', function() {
         setTimeout(function() {
             document.querySelector('.text').style.opacity = '1';
             typeWriter();
-        }, 1000); // Tiempo de espera antes de iniciar el tipeo (ajustable)
+        }, 1000); // Iniciar animación después de 1 segundo
     });
 </script>
 
