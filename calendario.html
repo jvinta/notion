@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- original:https://codepen.io/boudra/pen/raErwP -->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -8,79 +9,102 @@
     <style>
         body {
             font-family: monospace;
-            background-color: #E1D2BA; /* Color de fondo suave */
+        }
+
+        .wrapper {
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            justify-content: center;
+            flex-direction: column;
+            min-height: 100%;
         }
 
         #calendar {
-            position: relative;
+            margin: 0 auto;
             font-size: 14px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-            background-color: #FFFFFF; /* Fondo blanco */
-            transition: transform 0.3s ease; /* Animación de movimiento */
         }
 
         table {
-            width: 100%;
             border-collapse: collapse;
+            table-layout: fixed;
+            position: absolute;
+            background-color: #fff;
+            border: 2px solid #3D5B3B; /* Tono verde  */
+            box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
         }
 
         .month {
-            background-color: #3D5B3B; /* Color principal */
-            color: #FFFFFF;
+            background-color: #3D5B3B; /* Tono verde */
+            color: #fff;
             font-size: 1.5em;
-            text-align: center;
-            padding: 10px;
-            border-radius: 5px 5px 0 0;
+            padding: 5px; /* Añadido para separación */
+        }
+
+        .month .year {
+            font-size: 12px;
+            font-weight: normal;
+            display: block;
+            text-shadow: none;
+            color: #fff;
+            margin-top: 5px; /* Espacio entre mes y año */
+        }
+
+        .month span {
+            display: inline-block;
+            animation: highlight 3s infinite;
         }
 
         .year {
             font-size: 12px;
             font-weight: normal;
             display: block;
-            text-align: center;
-            color: #FFFFFF;
+            text-shadow: none;
+            color: #fff;
         }
 
         .day-header {
-            background-color: #F3FFF3; /* Color suave para los días de la semana */
-            color: #000000; /* Texto negro */
-            text-align: center;
+            background-color: #f3fff3;
+            color: #000; /* Color de texto para los encabezados */
+            font-weight: bold;
             padding: 5px;
         }
 
         td, th {
             text-align: center;
-            padding: 10px 5px;
-            border: none; /* Sin bordes */
+            background-color: #fff;
         }
 
-        td span {
-            display: block;
+        th {
             padding: 10px;
-            border-radius: 50%; /* Círculo alrededor del número */
-            transition: background-color 0.3s ease;
         }
 
-        .avui span {
+        td {
+            padding: 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        td>span {
+            color: #333; /* Color de texto principal */
+            padding: 10px;
+            display: block;
+            border: 2px solid transparent;
+            transition: border 0.3s ease;
+        }
+
+        td.avui>span {
             font-weight: bold;
-            background-color: #3D5B3B; /* Color principal */
-            color: #FFFFFF; /* Texto blanco */
+            background-color: #3D5B3B; /* verde */
+            color: #fff;
         }
 
-        .fora span {
+        td.fora > span {
             opacity: 0.2;
         }
 
         .boto-next, .boto-prev {
-            background: #3D5B3B; /* Color principal */
-            color: #FFFFFF;
+            background: #D88656; /* Tono tierra suave modificado */
+            color: #fff;
             font-family: inherit;
             border: none;
             font-size: 25px;
@@ -93,21 +117,25 @@
             vertical-align: middle;
             position: absolute;
             top: 15px;
-            cursor: pointer;
-            border-radius: 50%; /* Botones redondeados */
         }
 
-        .boto-next {
-            right: 10px;
-        }
+        .boto-next { right: 10px; padding-left: 13px; }
+        .boto-prev { left: 10px; padding-right: 13px; }
 
-        .boto-prev {
-            left: 10px;
+        @keyframes highlight {
+            0%, 100% {
+                color: #fff;
+                font-size: 1.2em;
+            }
+            50% {
+                color: #d08c3a; /* Color de texto más claro */
+                font-size: 1.3em;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="wrapper">
+    <div class="">
         <div id="calendar"></div>
     </div>
     <script>
@@ -121,17 +149,18 @@
         ];
 
         var days_abr = [
-            'Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'
+            'Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'
         ];
 
         Number.prototype.pad = function(num) {
             var str = '';
             for (var i = 0; i < (num - this.toString().length); i++)
                 str += '0';
-            return str + this.toString();
+            return str += this.toString();
         }
 
         function calendar(widget, data) {
+
             var original = widget.getElementsByClassName('actiu')[0];
 
             if (typeof original === 'undefined') {
@@ -173,17 +202,15 @@
             boto_next.innerHTML = '&#9656;';
 
             titol.appendChild(boto_prev);
-            titol.appendChild(document.createElement('span')).innerHTML =
-                months[data.getMonth()] + '<span class="year">' + data.getFullYear() + '</span>';
-
+            titol.innerHTML += months[data.getMonth()] + ' <span class="year">' + data.getFullYear() + '</span>';
             titol.appendChild(boto_next);
 
-            boto_prev.onclick = function () {
+            boto_prev.onclick = function() {
                 data.setMonth(data.getMonth() - 1);
                 calendar(widget, data);
             };
 
-            boto_next.onclick = function () {
+            boto_next.onclick = function() {
                 data.setMonth(data.getMonth() + 1);
                 calendar(widget, data);
             };
@@ -209,8 +236,8 @@
                 -inici_mes);
 
             /* 6 setmanes per cobrir totes les posiblitats
-            * Quedaria mes consistent alhora de mostrar molts mesos 
-            * en una quadricula */
+             *  Quedaria mes consistent alhora de mostrar molts mesos 
+             *  en una quadricula */
             for (var s = 0; s < 6; s++) {
                 var fila = document.createElement('tr');
 
@@ -237,7 +264,7 @@
                 e.appendChild(fila);
             }
 
-            setTimeout(function () {
+            setTimeout(function() {
                 e.className = 'actiu';
                 original.className +=
                     diff === 0 ? ' amagat-dreta' : ' amagat-esquerra';
@@ -245,7 +272,7 @@
 
             original.className = 'inactiu';
 
-            setTimeout(function () {
+            setTimeout(function() {
                 var inactius = document.getElementsByClassName('inactiu');
                 for (var i = 0; i < inactius.length; i++)
                     widget.removeChild(inactius[i]);
