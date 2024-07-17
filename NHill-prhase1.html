@@ -65,8 +65,7 @@
             quoteElement.style.opacity = '0';
             authorElement.style.opacity = '0';
             setTimeout(function() {
-                fadeInAuthor(); // Volver a mostrar la frase y el nombre
-                setTimeout(typeWriter, 1000); // Reiniciar la animación después de desvanecer
+                typeWriter(); // Reiniciar la animación después de desvanecer
             }, 1000); // Tiempo antes de reiniciar la animación (ajustable)
         }, 1000); // Tiempo antes de desvanecer la frase y el autor (ajustable)
     }
