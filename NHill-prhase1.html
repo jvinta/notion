@@ -19,31 +19,42 @@
     .text {
         font-size: 24px;
         opacity: 0;
-        animation: fadeInOut 8s infinite; /* Ajusta la duración del loop según necesites */
-    }
-    @keyframes fadeInOut {
-        0%, 100% {
-            opacity: 0;
-        }
-        10%, 90% {
-            opacity: 1;
-        }
     }
 </style>
 </head>
 <body>
 <div class="text">
-    <p>Remember, your only real limitation is the one that you set up in your own mind</p>
-    <p>Napoleon Hill</p>
+    <p id="quote"></p>
+    <p id="author" style="opacity: 0;">Napoleon Hill</p>
 </div>
 
 <script>
-    function fadeOutText() {
-        setTimeout(function() {
-            document.querySelector('.text').style.opacity = '0';
-        }, 5000); // 5 segundos para desvanecer
+    const quoteElement = document.getElementById('quote');
+    const quote = "Remember, your only real limitation is the one that you set up in your own mind";
+    let index = 0;
+
+    function typeWriter() {
+        if (index < quote.length) {
+            quoteElement.innerHTML += quote.charAt(index);
+            index++;
+            setTimeout(typeWriter, 100); // Velocidad de tipeo (ajustable)
+        } else {
+            fadeOutAuthor();
+        }
     }
-    setInterval(fadeOutText, 8000); // 8 segundos para repetir
+
+    function fadeOutAuthor() {
+        setTimeout(function() {
+            document.getElementById('author').style.opacity = '0';
+        }, 2000); // Tiempo antes de desvanecer el autor (ajustable)
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            document.querySelector('.text').style.opacity = '1';
+            typeWriter();
+        }, 1000); // Tiempo antes de iniciar el tipeo (ajustable)
+    });
 </script>
 
 </body>
