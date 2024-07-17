@@ -19,7 +19,7 @@
   .typing-text {
     color: #fff;
     font-size: 36px;
-    line-height: 1.2; /* Espacio entre líneas */
+    line-height: 1.4; /* Espacio entre líneas */
     white-space: pre-wrap;
     overflow: hidden;
     text-align: center;
@@ -35,10 +35,15 @@
   }
 
   .typing-animation {
-    animation: typing-in 8s steps(40, end) forwards, typing-out 4s 8s forwards;
+    animation: typing-in-1 6s steps(50, end), typing-in-2 8s steps(70, end) 6s forwards, typing-out 4s 14s forwards;
   }
 
-  @keyframes typing-in {
+  @keyframes typing-in-1 {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes typing-in-2 {
     from { width: 0 }
     to { width: 100% }
   }
@@ -52,20 +57,9 @@
 <body>
   <div class="typing-text typing-animation">
     <span class="circle"></span>
-    Remember, your only real limitation is the one that you set up in your own mind
-    <br>
-    - Napoleon Hill
-    <span class="circle"></span>
+    Remember, your only real limitation is<br>
+    <span style="margin-left: 175px;">the one that you set up in your</span><br>
+    <span style="margin-left: 250px;">own mind - Napoleon Hill</span><span class="circle"></span>
   </div>
 
-  <script>
-    // JavaScript para reiniciar la animación cada 12 segundos
-    setInterval(function() {
-      var textElement = document.querySelector('.typing-text');
-      textElement.classList.remove('typing-animation'); // remover clase para reiniciar animación
-      void textElement.offsetWidth; // trigger reflow
-      textElement.classList.add('typing-animation'); // reanudar animación de aparición y desaparición
-    }, 12000); // reiniciar animación cada 12 segundos
-  </script>
-</body>
-</html>
+  < , into
