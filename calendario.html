@@ -38,11 +38,21 @@
             background-color: #8b4513; /* Terracota color */
             color: #fff;
             font-size: 1.5em;
+            padding: 5px; /* Añadido para separación */
+        }
+
+        .month .year {
+            font-size: 12px;
+            font-weight: normal;
+            display: block;
+            text-shadow: none;
+            color: #fff;
+            margin-top: 5px; /* Espacio entre mes y año */
         }
 
         .month span {
             display: inline-block;
-            animation: highlight 2s infinite;
+            animation: highlight 3s infinite;
         }
 
         .year {
@@ -112,11 +122,11 @@
         @keyframes highlight {
             0%, 100% {
                 color: #fff;
-                font-size: 1em;
+                font-size: 1.2em;
             }
             50% {
                 color: #d2691e; /* Color terracota más claro */
-                font-size: 1.2em;
+                font-size: 1.3em;
             }
         }
     </style>
@@ -189,9 +199,7 @@
             boto_next.innerHTML = '&#9656;';
 
             titol.appendChild(boto_prev);
-            titol.appendChild(document.createElement('span')).innerHTML =
-                months[data.getMonth()] + '<span class="year">' + data.getFullYear() + '</span>';
-
+            titol.innerHTML += months[data.getMonth()] + ' <span class="year">' + data.getFullYear() + '</span>';
             titol.appendChild(boto_next);
 
             boto_prev.onclick = function() {
