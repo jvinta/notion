@@ -3,126 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendario Minimalista Boho</title>
+    <title>Calendario</title>
 
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #FFFFFF; /* Fondo principal blanco */
-            margin: 0;
-            padding: 0;
+            font-family: monospace;
+            background-color: #E1D2BA; /* Color de fondo suave */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
         }
 
-        .calendar-container {
-            background-color: #E1D2BA; /* Fondo del calendario */
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        #calendar {
+            position: relative;
+            font-size: 14px;
             overflow: hidden;
-            width: 300px;
-            margin-top: 20px; /* Espacio superior */
-            padding: 10px; /* Espacio interno */
-            position: relative; /* Añadido para posicionamiento relativo */
-        }
-
-        .month {
-            background-color: #3D5B3B; /* Encabezado del mes */
-            color: #FFFFFF; /* Texto del encabezado */
-            font-size: 1.5em;
-            padding: 10px;
-            text-align: center;
-            margin-bottom: 10px; /* Espacio inferior */
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            position: relative; /* Añadido para posicionamiento relativo */
-            animation: fade 0.5s ease; /* Animación sutil */
-        }
-
-        .month .year {
-            display: block;
-            font-size: 0.7em;
-            font-weight: normal;
-            color: #FFFFFF; /* Color del año */
-            margin-top: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            background-color: #FFFFFF; /* Fondo blanco */
+            transition: transform 0.3s ease; /* Animación de movimiento */
         }
 
         table {
+            width: 100%;
             border-collapse: collapse;
-            table-layout: fixed;
-            background-color: #FFFFFF; /* Fondo de la tabla */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
-            border-radius: 5px;
-            width: 100%; /* Añadido para que ocupe todo el ancho */
+        }
+
+        .month {
+            background-color: #3D5B3B; /* Color principal */
+            color: #FFFFFF;
+            font-size: 1.5em;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .year {
+            font-size: 12px;
+            font-weight: normal;
+            display: block;
+            text-align: center;
+            color: #FFFFFF;
         }
 
         .day-header {
-            background-color: #F3FFF3; /* Encabezado de días */
+            background-color: #F3FFF3; /* Color suave para los días de la semana */
+            color: #000000; /* Texto negro */
             text-align: center;
-            font-weight: bold;
-            padding: 8px 0;
+            padding: 5px;
         }
 
         td, th {
             text-align: center;
-            padding: 10px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 10px 5px;
+            border: none; /* Sin bordes */
         }
 
         td span {
             display: block;
-            padding: 8px;
-            border: 2px solid transparent;
-            transition: border 0.3s ease;
+            padding: 10px;
+            border-radius: 50%; /* Círculo alrededor del número */
+            transition: background-color 0.3s ease;
         }
 
-        td.avui > span {
+        .avui span {
             font-weight: bold;
-            background-color: #3D5B3B; /* Color de fondo para el día actual */
-            color: #FFFFFF; /* Texto para el día actual */
-            border-radius: 50%; /* Añadido para hacer circular */
+            background-color: #3D5B3B; /* Color principal */
+            color: #FFFFFF; /* Texto blanco */
         }
 
-        td.fora > span {
+        .fora span {
             opacity: 0.2;
         }
 
-        .boto-prev, .boto-next {
-            background-color: #CA8F6D; /* Color de fondo de las flechas */
-            color: #FFFFFF; /* Color del texto de las flechas */
+        .boto-next, .boto-prev {
+            background: #3D5B3B; /* Color principal */
+            color: #FFFFFF;
+            font-family: inherit;
+            border: none;
             font-size: 25px;
             font-weight: bold;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
+            text-shadow: inherit;
+            padding: 2px 10px 5px 10px;
+            line-height: 1px;
+            height: 30px;
+            width: 30px;
+            vertical-align: middle;
             position: absolute;
-            top: 10px;
-            z-index: 1; /* Añadido para estar sobre el calendario */
-        }
-
-        .boto-prev {
-            left: 10px;
+            top: 15px;
+            cursor: pointer;
+            border-radius: 50%; /* Botones redondeados */
         }
 
         .boto-next {
             right: 10px;
         }
 
-        /* Animación para el cambio de mes */
-        @keyframes fade {
-            0% { opacity: 0; transform: translateY(-10px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        .month span {
-            animation: fade 0.5s ease;
+        .boto-prev {
+            left: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="calendar-container">
+    <div class="wrapper">
         <div id="calendar"></div>
     </div>
     <script>
@@ -141,10 +126,10 @@
 
         Number.prototype.pad = function(num) {
             var str = '';
-            for(var i = 0; i < (num - this.toString().length); i++)
+            for (var i = 0; i < (num - this.toString().length); i++)
                 str += '0';
             return str + this.toString();
-        };
+        }
 
         function calendar(widget, data) {
             var original = widget.getElementsByClassName('actiu')[0];
@@ -154,26 +139,30 @@
                 original.setAttribute('data-actual',
                     data.getFullYear() + '/' +
                     data.getMonth().pad(2) + '/' +
-                    data.getDate().pad(2));
+                    data.getDate().pad(2))
                 widget.appendChild(original);
             }
 
             var diff = data - new Date(original.getAttribute('data-actual'));
+
             diff = new Date(diff).getMonth();
 
             var e = document.createElement('table');
+
             e.className = diff === 0 ? 'amagat-esquerra' : 'amagat-dreta';
             e.innerHTML = '';
+
             widget.appendChild(e);
+
             e.setAttribute('data-actual',
                 data.getFullYear() + '/' +
                 data.getMonth().pad(2) + '/' +
-                data.getDate().pad(2));
+                data.getDate().pad(2))
 
             var fila = document.createElement('tr');
             var titol = document.createElement('th');
             titol.setAttribute('colspan', 7);
-            titol.setAttribute('class','month');
+            titol.setAttribute('class', 'month');
 
             var boto_prev = document.createElement('button');
             boto_prev.className = 'boto-prev';
@@ -184,17 +173,17 @@
             boto_next.innerHTML = '&#9656;';
 
             titol.appendChild(boto_prev);
-            titol.appendChild(document.createElement('span')).innerHTML = 
+            titol.appendChild(document.createElement('span')).innerHTML =
                 months[data.getMonth()] + '<span class="year">' + data.getFullYear() + '</span>';
 
             titol.appendChild(boto_next);
 
-            boto_prev.onclick = function() {
+            boto_prev.onclick = function () {
                 data.setMonth(data.getMonth() - 1);
                 calendar(widget, data);
             };
 
-            boto_next.onclick = function() {
+            boto_next.onclick = function () {
                 data.setMonth(data.getMonth() + 1);
                 calendar(widget, data);
             };
@@ -204,33 +193,42 @@
 
             fila = document.createElement('tr');
 
-            for(var i = 1; i < 7; i++) {
+            for (var i = 1; i < 7; i++) {
                 fila.innerHTML += '<th class="day-header">' + days_abr[i] + '</th>';
             }
 
             fila.innerHTML += '<th class="day-header">' + days_abr[0] + '</th>';
             e.appendChild(fila);
 
-            var inici_mes = new Date(data.getFullYear(), data.getMonth(), -1).getDay();
-            var actual = new Date(data.getFullYear(), data.getMonth(), -inici_mes);
+            /* Obtinc el dia que va acabar el mes anterior */
+            var inici_mes =
+                new Date(data.getFullYear(), data.getMonth(), -1).getDay();
 
-            for(var s = 0; s < 6; s++) {
+            var actual = new Date(data.getFullYear(),
+                data.getMonth(),
+                -inici_mes);
+
+            /* 6 setmanes per cobrir totes les posiblitats
+            * Quedaria mes consistent alhora de mostrar molts mesos 
+            * en una quadricula */
+            for (var s = 0; s < 6; s++) {
                 var fila = document.createElement('tr');
 
-                for(var d = 1; d < 8; d++) {
+                for (var d = 1; d < 8; d++) {
                     var cela = document.createElement('td');
                     var span = document.createElement('span');
+
                     cela.appendChild(span);
 
                     span.innerHTML = actual.getDate();
 
-                    if(actual.getMonth() !== data.getMonth()) {
+                    if (actual.getMonth() !== data.getMonth())
                         cela.className = 'fora';
-                    }
 
-                    if(data.getDate() === actual.getDate() && data.getMonth() === actual.getMonth()) {
+                    /* Si es avui el decorem */
+                    if (data.getDate() == actual.getDate() &&
+                        data.getMonth() == actual.getMonth())
                         cela.className = 'avui';
-                    }
 
                     actual.setDate(actual.getDate() + 1);
                     fila.appendChild(cela);
@@ -239,16 +237,17 @@
                 e.appendChild(fila);
             }
 
-            setTimeout(function() {
+            setTimeout(function () {
                 e.className = 'actiu';
-                original.className += diff === 0 ? ' amagat-dreta' : ' amagat-esquerra';
+                original.className +=
+                    diff === 0 ? ' amagat-dreta' : ' amagat-esquerra';
             }, 20);
 
             original.className = 'inactiu';
 
-            setTimeout(function() {
+            setTimeout(function () {
                 var inactius = document.getElementsByClassName('inactiu');
-                for(var i = 0; i < inactius.length; i++)
+                for (var i = 0; i < inactius.length; i++)
                     widget.removeChild(inactius[i]);
             }, 1000);
         }
