@@ -3,78 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Napoleon Hill Inspiration</title>
+<title>Notion Widget</title>
 <style>
-    body {
-        background-color: #000;
-        font-family: serif;
-        color: #fff;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-    }
-    .text {
-        font-size: 32px; /* Tamaño de fuente aumentado */
-        opacity: 0;
-    }
-    #quote, #author {
-        transition: opacity 1s ease; /* Transición suave de opacidad */
-    }
+  body {
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: serif;
+    overflow: hidden;
+  }
+
+  .typing-text {
+    color: #fff;
+    font-size: 36px;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .shining-star {
+    animation: shining 1.5s infinite;
+    margin: 0 10px; /* Espacio alrededor de las estrellas */
+  }
+
+  .typing-animation {
+    animation: typing-in 6s steps(30, end) forwards, typing-out 3s 6s forwards;
+  }
+
+  @keyframes typing-in {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes typing-out {
+    from { width: 100% }
+    to { width: 0 }
+  }
+
+  @keyframes shining {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+  }
 </style>
 </head>
 <body>
-<div class="text">
-    <p id="quote"></p>
-    <p id="author" style="opacity: 0;">Napoleon Hill</p>
-</div>
+  <div class="typing-text typing-animation">
+    <span class="shining-star">✦</span>
+    Remember, your only real limitation is the one that you set up in your own mind
+    <br>
+    - Napoleon Hill
+    <span class="shining-star">✦</span>
+  </div>
 
-<script>
-    const quoteElement = document.getElementById('quote');
-    const authorElement = document.getElementById('author');
-    const quote = "Remember, your only real limitation is the one that you set up in your own mind";
-    let index = 0;
-
-    function typeWriter() {
-        index = 0;
-        quoteElement.innerHTML = ''; // Reiniciar el contenido de la frase
-        typeWriterLoop();
-    }
-
-    function typeWriterLoop() {
-        if (index < quote.length) {
-            quoteElement.innerHTML += quote.charAt(index);
-            index++;
-            setTimeout(typeWriterLoop, 60); // Velocidad de tipeo ajustada a 60ms
-        } else {
-            fadeInAuthor();
-        }
-    }
-
-    function fadeInAuthor() {
-        setTimeout(function() {
-            authorElement.style.opacity = '1';
-            setTimeout(fadeOutText, 1000); // Desvanecer después de 1 segundo
-        }, 1000); // Mostrar autor después de 1 segundo
-    }
-
-    function fadeOutText() {
-        setTimeout(function() {
-            quoteElement.style.opacity = '0';
-            authorElement.style.opacity = '0';
-            setTimeout(typeWriter, 1000); // Reiniciar la animación después de 1 segundo
-        }, 1000); // Desvanecer después de 1 segundo
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(function() {
-            document.querySelector('.text').style.opacity = '1';
-            typeWriter();
-        }, 1000); // Iniciar animación después de 1 segundo
-    });
-</script>
-
+  <script>
+    // JavaScript para reiniciar la animación cada 9 segundos
+    setInterval(function() {
+      var textElement = document.querySelector('.typing-text');
+      textElement.classList.remove('typing-animation'); // remover clase para reiniciar animación
+      void textElement.offsetWidth; // trigger reflow
+      textElement.classList.add('typing-animation'); // reanudar animación de aparición y desaparición
+    }, 9000); // reiniciar animación cada 9 segundos
+  </script>
 </body>
 </html>
