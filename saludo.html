@@ -42,11 +42,11 @@
     var greet;
 
     if (hrs < 12)
-        greet = 'Buenos días ';
+        greet = '¡Buenos días! ';
     else if (hrs >= 12 && hrs <= 17)
-        greet = 'Buenas tardes ';
+        greet = '¡Buenas tardes! ';
     else if (hrs >= 17 && hrs <= 24)
-        greet = 'Buenas noches ';
+        greet = '¡Buenas noches! ';
 
     document.getElementById('lbl').innerHTML =
         greet + `<div id="date"> Es ${date}</div>`;
