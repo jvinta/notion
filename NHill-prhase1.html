@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Napoleon Hill Quote Widget</title>
+<style>
+  .notion-widget {
+    width: 300px; /* Tamaño del widget */
+    height: auto;
+    padding: 10px;
+    border: 2px solid #ccc; /* Borde alrededor del widget */
+    border-radius: 5px; /* Bordes redondeados */
+    text-align: center; /* Centrar el texto */
+    animation: fade 6s infinite; /* Animación de fade */
+  }
+
+  @keyframes fade {
+    0%, 100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  #quote {
+    font-size: 16px; /* Tamaño de la fuente */
+    line-height: 1.5; /* Espaciado entre líneas */
+  }
+</style>
+</head>
+<body>
+  <div class="notion-widget">
+    <p id="quote">Remember, your only real limitation is the one that you set up in your own mind - Napoleon Hill</p>
+  </div>
+</body>
+</html>
