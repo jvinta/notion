@@ -24,13 +24,17 @@
     text-align: center;
   }
 
-  .shining-star {
-    animation: shining 1.5s infinite;
-    margin: 0 10px; /* Espacio alrededor de las estrellas */
+  .circle {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin: 0 5px; /* Espacio alrededor de los círculos */
   }
 
   .typing-animation {
-    animation: typing-in 6s steps(30, end) forwards, typing-out 3s 6s forwards;
+    animation: typing-in 8s steps(40, end) forwards, typing-out 4s 8s forwards;
   }
 
   @keyframes typing-in {
@@ -42,30 +46,25 @@
     from { width: 100% }
     to { width: 0 }
   }
-
-  @keyframes shining {
-    0%, 50%, 100% { opacity: 1; }
-    25%, 75% { opacity: 0; }
-  }
 </style>
 </head>
 <body>
   <div class="typing-text typing-animation">
-    <span class="shining-star">✦</span>
+    <span class="circle"></span>
     Remember, your only real limitation is the one that you set up in your own mind
     <br>
     - Napoleon Hill
-    <span class="shining-star">✦</span>
+    <span class="circle"></span>
   </div>
 
   <script>
-    // JavaScript para reiniciar la animación cada 9 segundos
+    // JavaScript para reiniciar la animación cada 12 segundos
     setInterval(function() {
       var textElement = document.querySelector('.typing-text');
       textElement.classList.remove('typing-animation'); // remover clase para reiniciar animación
       void textElement.offsetWidth; // trigger reflow
       textElement.classList.add('typing-animation'); // reanudar animación de aparición y desaparición
-    }, 9000); // reiniciar animación cada 9 segundos
+    }, 12000); // reiniciar animación cada 12 segundos
   </script>
 </body>
 </html>
