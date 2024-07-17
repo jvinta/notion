@@ -25,7 +25,7 @@
     line-height: 1.6; /* Espaciado entre líneas */
     overflow: hidden; /* Para ocultar texto que se desborda */
     white-space: nowrap; /* Para que no se divida el texto */
-    animation: typeIn 4s steps(40) forwards, fadeOut 2s 6s forwards, fadeIn 0s 8s forwards;
+    animation: typeIn 4s steps(40) forwards, fadeOut 2s 6s forwards, fadeIn 0s 8s forwards, resetAnimation 8s forwards;
   }
 
   @keyframes typeIn {
@@ -52,6 +52,15 @@
     }
     100% {
       opacity: 1;
+    }
+  }
+
+  @keyframes resetAnimation {
+    0%, 100% {
+      width: 0;
+    }
+    50% {
+      width: 100%;
     }
   }
 
