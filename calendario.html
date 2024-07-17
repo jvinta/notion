@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #E1D2BA; /* Fondo principal */
+            background-color: #FFFFFF; /* Fondo principal blanco */
             margin: 0;
             padding: 0;
             display: flex;
@@ -23,6 +23,8 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             width: 300px;
+            margin-top: 20px; /* Espacio superior */
+            padding: 10px; /* Espacio interno */
         }
 
         .month {
@@ -31,6 +33,7 @@
             font-size: 1.5em;
             padding: 10px;
             text-align: center;
+            margin-bottom: 10px; /* Espacio inferior */
         }
 
         .month .year {
@@ -78,14 +81,17 @@
             font-size: 18px;
             padding: 5px 10px;
             cursor: pointer;
+            position: absolute; /* Ajuste absoluto */
+            top: 50%; /* Centrado vertical */
+            transform: translateY(-50%); /* Ajuste vertical */
         }
 
         .boto-next {
-            float: right;
+            right: 10px; /* Alineación a la derecha */
         }
 
         .boto-prev {
-            float: left;
+            left: 10px; /* Alineación a la izquierda */
         }
 
         @keyframes highlight {
