@@ -5,25 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Napoleon Hill Quote Widget</title>
 <style>
-  .notion-widget {
-    width: 400px; /* Tamaño del widget aumentado */
-    height: auto;
-    padding: 30px;
-    border: 2px solid #000; /* Borde negro */
-    border-radius: 10px; /* Bordes más redondeados */
-    text-align: center; /* Centrar el texto */
-    background-color: #fff; /* Fondo blanco */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    color: #000; /* Color de texto negro */
-    font-family: Arial, sans-serif; /* Familia de fuente */
-    overflow: hidden; /* Para ocultar texto que se desborda */
-    position: relative; /* Para ajustar el texto */
+  body {
+    background-color: #000; /* Fondo negro para todo el body */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: serif;
   }
 
-  .text-container {
-    position: relative;
-    overflow: hidden;
-    height: 80px; /* Altura ajustable para mostrar la frase completa */
+  #quote {
+    color: #E1D2BA; /* Color de texto hueso */
+    font-size: 24px; /* Tamaño de la fuente de la frase */
+    line-height: 1.6; /* Espaciado entre líneas */
+    text-align: center; /* Centrar el texto */
+    overflow: hidden; /* Para ocultar texto que se desborda */
+    white-space: nowrap; /* Para que no se divida el texto */
+    animation: typeIn 5s steps(40) forwards, fadeOut 5s 7s forwards;
   }
 
   @keyframes typeIn {
@@ -44,25 +43,17 @@
     }
   }
 
-  #quote {
-    font-size: 20px; /* Tamaño de la fuente de la frase */
-    line-height: 1.6; /* Espaciado entre líneas */
-    margin-bottom: 20px; /* Espacio debajo de la frase */
-    white-space: nowrap; /* Para que no se divida el texto */
-    overflow: hidden; /* Para ocultar texto que se desborda */
-    animation: typeIn 5s steps(40) forwards, fadeOut 5s 7s forwards;
-  }
-
   #author {
-    font-size: 16px; /* Tamaño de la fuente del autor */
+    color: #E1D2BA; /* Color de texto hueso */
+    font-size: 18px; /* Tamaño de la fuente del autor */
+    text-align: right; /* Alinear autor a la derecha */
+    margin-top: 10px; /* Espacio encima del autor */
   }
 </style>
 </head>
 <body>
   <div class="notion-widget">
-    <div class="text-container">
-      <p id="quote">"Remember, your only real limitation is the one that you set up in your own mind."</p>
-    </div>
+    <p id="quote">"Remember, your only real limitation is the one that you set up in your own mind."</p>
     <p id="author">- Napoleon Hill</p>
   </div>
 </body>
