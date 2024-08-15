@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notion Widget</title>
+<style>
+  body {
+    background-color: #6749BB;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
+
+  .typing-text {
+    color: #fff;
+    font-size: 48px; /* Cambiado a tamaño "Huge" */
+    white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .shining-star {
+    animation: shining 1.5s infinite;
+    margin: 0 10px; /* Espacio alrededor de las estrellas */
+  }
+
+  .typing-animation {
+    animation: typing-in 6s steps(30, end) forwards, typing-out 3s 6s forwards;
+  }
+
+  @keyframes typing-in {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes typing-out {
+    from { width: 100% }
+    to { width: 0 }
+  }
+
+  @keyframes shining {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+  }
+</style>
+</head>
+<body>
+  <div class="typing-text typing-animation">
+    <span class="shining-star">✦</span>
+    Conectando con la Naturaleza
+    <span class="shining-star">✦</span>
+  </div>
+
+  <script>
+    // JavaScript para reiniciar la animación cada 9 segundos
+    setInterval(function() {
+      var textElement = document.querySelector('.typing-text');
+      textElement.classList.remove('typing-animation'); // remover clase para reiniciar animación
+      void textElement.offsetWidth; // trigger reflow
+      textElement.classList.add('typing-animation'); // reanudar animación de aparición y desaparición
+    }, 9000); // reiniciar animación cada 9 segundos
+  </script>
+</body>
+</html>
