@@ -58,15 +58,15 @@
 
     if (hrs < 12)
         greet = 'Buenos días ';
-        motiva = 'Cosas Maravillosas te esperan'
+        motiva = 'Cosas Maravillosas te esperan';
     else if (hrs >= 12 && hrs <= 17)
         greet = 'Buenas tardes ';
-        motiva = 'Estás dando lo mejor de vos'
+        motiva = 'Estás dando lo mejor de vos';
     else if (hrs >= 17 && hrs <= 24)
         greet = 'Buenas noches ';
         motiva= 'Agradecé por este día que se va';
 
     document.getElementById('lbl').innerHTML =
-        greet + `<div id="date"> Es ${date}</div>`;
+        greet + motiva + `<div id="date"> Es ${date}</div>`;
 </script>
 </html>
