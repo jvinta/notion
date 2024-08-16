@@ -54,17 +54,18 @@
     var date = `${dayOfWeek} ${today.getDate()} de <span class="highlight-month">${monthName}</span> de ${today.getFullYear()}`;
 
     var greet;
-    var motiva
+    var motiva;
 
-    if (hrs < 12)
+    if (hrs < 12) {
         greet = 'Buenos días ';
         motiva = 'Cosas Maravillosas te esperan';
-    else if (hrs >= 12 && hrs <= 17)
+    } else if (hrs >= 12 && hrs <= 17) {
         greet = 'Buenas tardes ';
         motiva = 'Estás dando lo mejor de vos';
-    else if (hrs >= 17 && hrs <= 24)
+    } else if (hrs > 17 && hrs <= 24) {
         greet = 'Buenas noches ';
         motiva= 'Agradecé por este día que se va';
+    }
 
     document.getElementById('lbl').innerHTML =
         greet + motiva + `<div id="date"> Es ${date}</div>`;
